@@ -9,5 +9,9 @@ public class RestConstants {
 
     public static final String RESOURCE_SERIE = "/series";
 
-    public static final String RESOURCE_SCORE = "/users/{userId}/series/{serieId}/scores";
+    public static final String PARAMTER_SERIE_ID = "/{serieId}";
+
+    public static final String RESOURCE_CREATE_SCORE = "/users/{userId}/series/{serieId}/scores";
+
+    public static final String RESOURCE_SCORE = "/scores";
 }
