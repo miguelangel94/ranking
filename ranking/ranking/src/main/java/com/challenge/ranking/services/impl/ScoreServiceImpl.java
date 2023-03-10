@@ -37,6 +37,8 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public ScoreRest createReview(float score, Long userId, Long serieId) throws RankingException {
+        verifyTheScore(score);
+
         ScoreServiceImpl scoreService = new ScoreServiceImpl();
         UserRest userRest = userService.findById(userId);
         SerieRest serieRest = serieService.findById(serieId);
@@ -51,7 +53,7 @@ public class ScoreServiceImpl implements ScoreService {
             scoreRepository.save(scoreEntity);
         } catch (final Exception e) {
             LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
-            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR, e.getMessage());
         }
 
         return ScoreConverter.mapToRest(score, userRest.getName(), serieRest.getName());
@@ -72,6 +74,13 @@ public class ScoreServiceImpl implements ScoreService {
         scoreList.add(newScore);
         Float average = scoreAverageCalculator(scoreList);
             serieService.updateAverageScore(serieId, average);
+    }
+
+    void verifyTheScore(float score) throws RankingException {
+        if (score > 10 || score < 0){
+            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR, ExceptionConstants.INVALID_SCORE_MESSAGE);
+
+        }
     }
 }
 

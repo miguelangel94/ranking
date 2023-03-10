@@ -9,7 +9,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "SERIE")
+@Table(
+        name = "SERIE",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})}
+)
 public class Serie {
 
     @Id

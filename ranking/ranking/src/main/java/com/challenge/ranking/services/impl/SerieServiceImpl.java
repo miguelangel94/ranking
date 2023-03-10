@@ -31,7 +31,7 @@ public class SerieServiceImpl implements SerieService {
             return SerieConverter.mapToRest(serieRepository.save(SerieConverter.mapToEntity(serieRest)));
         } catch (final Exception e) {
             LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
-            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
     @Override
