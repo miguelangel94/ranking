@@ -30,7 +30,7 @@ public class Serie {
     private String sinopsis;
 
     @Column(name = "AVERAGE_SCORE")
-    private float averageScore;
+    private Float averageScore;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "serie")
     private List<Score> scoreList;

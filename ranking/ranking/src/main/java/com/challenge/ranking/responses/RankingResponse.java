@@ -1,7 +1,11 @@
 package com.challenge.ranking.responses;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.io.Serializable;
+@Data
+@AllArgsConstructor
 public class RankingResponse<T> implements Serializable {
 
 	private String status;
@@ -11,53 +15,11 @@ public class RankingResponse<T> implements Serializable {
 
 	private static final long serialVersionUID = 7302319210373510173L;
 
-	public RankingResponse() {
-		super();
-	}
-
 	public RankingResponse(String status, String code, String message) {
 		this.status = status;
 		this.code = code;
 		this.message = message;
 	}
 
-	public RankingResponse(String status, String code, String message, T data) {
-		this.status = status;
-		this.code = code;
-		this.message = message;
-		this.data = data;
-	}
-
-	public String getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getMessage() {
-		return this.message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public T getData() {
-		return data;
-	}
-
-	public void setData(T data) {
-		this.data = data;
-	}
 
 }

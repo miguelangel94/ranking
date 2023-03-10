@@ -16,7 +16,7 @@ public class Score {
     private Long id;
 
     @Column(name = "SCORE",  nullable = false)
-    private float score;
+    private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SERIE_ID", nullable = false)

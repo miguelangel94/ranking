@@ -45,7 +45,7 @@ public class ScoreServiceImpl implements ScoreService {
         try {
 
             List<Float> scoreList=  scoreRepository.findBySerieId(serieId).stream()
-                    .map(score3 -> score3.getScore())
+                    .map(Score::getScore)
                     .collect(Collectors.toList());
             updateAverageScoreSerie(serieId, scoreList, score);
             scoreRepository.save(scoreEntity);
@@ -59,9 +59,9 @@ public class ScoreServiceImpl implements ScoreService {
 
     public Float scoreAverageCalculator (List<Float> scoreList)  {
 
-        Float average = 0f;
-        for (int x = 0; x < scoreList.size(); x++) {
-            average = average + scoreList.get(x);
+        float average = 0f;
+        for (Float aFloat : scoreList) {
+            average = average + aFloat;
         }
         average = average/scoreList.size();
 
@@ -71,12 +71,7 @@ public class ScoreServiceImpl implements ScoreService {
     public void updateAverageScoreSerie(Long serieId, List<Float> scoreList, Float newScore) throws RankingException {
         scoreList.add(newScore);
         Float average = scoreAverageCalculator(scoreList);
-        try {
             serieService.updateAverageScore(serieId, average);
-        } catch (final Exception e) {
-            LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
-            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
-        }
     }
 }
 
