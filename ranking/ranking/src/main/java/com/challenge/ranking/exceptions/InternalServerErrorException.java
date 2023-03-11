@@ -16,4 +16,8 @@ public class InternalServerErrorException extends RankingException {
 	public InternalServerErrorException(final String message, final ErrorDto data) {
 		super(HttpStatus.INTERNAL_SERVER_ERROR.value(), message, Arrays.asList(data));
 	}
+
+	public InternalServerErrorException(String internalServerError, String message) {
+		super(HttpStatus.INTERNAL_SERVER_ERROR.value(), message);
+	}
 }

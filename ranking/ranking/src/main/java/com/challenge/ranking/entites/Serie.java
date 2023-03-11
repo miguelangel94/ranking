@@ -9,7 +9,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "SERIE")
+@Table(
+        name = "SERIE",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})}
+)
 public class Serie {
 
     @Id
@@ -30,7 +33,7 @@ public class Serie {
     private String sinopsis;
 
     @Column(name = "AVERAGE_SCORE")
-    private float averageScore;
+    private Float averageScore;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "serie")
     private List<Score> scoreList;

@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_SERIE)
 public class SerieControllerImpl  implements SerieController {
@@ -24,5 +26,21 @@ public class SerieControllerImpl  implements SerieController {
     public RankingResponse<SerieRest> createSerie(@RequestBody @Valid SerieRest serieRest) throws RankingException {
         return new RankingResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), CommonConstants.OK,
                 serieService.createSerie(serieRest));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public RankingResponse<List<SerieRest>> retrieveSeriesListSortedByScore() throws RankingException {
+        return new RankingResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+                serieService.retrieveSeriesListSortedByScore());
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = RestConstants.RESOURCE_SCORE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public RankingResponse<List<SerieRest>> retrieveSerieScoreList() throws RankingException {
+        return new RankingResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+                serieService.retrieveSerieScoreList());
     }
 }

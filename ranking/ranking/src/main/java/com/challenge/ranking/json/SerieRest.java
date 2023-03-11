@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SerieRest implements Serializable {
@@ -17,6 +19,8 @@ public class SerieRest implements Serializable {
 
     private String sinopsis;
     private float averageScore;
+
+    private List<ScoreRest> scoreRestList;
 
 
 
