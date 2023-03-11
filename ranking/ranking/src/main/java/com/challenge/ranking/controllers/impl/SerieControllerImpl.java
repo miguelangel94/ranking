@@ -21,7 +21,7 @@ public class SerieControllerImpl  implements SerieController {
     @Autowired
     SerieService serieService;
     @Override
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public RankingResponse<SerieRest> createSerie(@RequestBody @Valid SerieRest serieRest) throws RankingException {
         return new RankingResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), CommonConstants.OK,
