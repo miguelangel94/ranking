@@ -12,8 +12,6 @@ import com.challenge.ranking.services.SerieService;
 import com.challenge.ranking.services.UserService;
 import com.challenge.ranking.utils.constants.ExceptionConstants;
 import com.challenge.ranking.utils.converters.ScoreConverter;
-import com.challenge.ranking.utils.converters.SerieConverter;
-import com.challenge.ranking.utils.converters.UserConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ScoreServiceImpl implements ScoreService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ScoreServiceImpl.class);
+
     @Autowired
     ScoreRepository scoreRepository;
 
@@ -39,13 +37,11 @@ public class ScoreServiceImpl implements ScoreService {
     public ScoreRest createReview(float score, Long userId, Long serieId) throws RankingException {
         verifyTheScore(score);
 
-        ScoreServiceImpl scoreService = new ScoreServiceImpl();
         UserRest userRest = userService.findById(userId);
         SerieRest serieRest = serieService.findById(serieId);
         Score scoreEntity = ScoreConverter.mapToEntity(score, userRest, serieRest);
 
         try {
-
             List<Float> scoreList=  scoreRepository.findBySerieId(serieId).stream()
                     .map(Score::getScore)
                     .collect(Collectors.toList());
@@ -55,7 +51,6 @@ public class ScoreServiceImpl implements ScoreService {
             LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
             throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR, e.getMessage());
         }
-
         return ScoreConverter.mapToRest(score, userRest.getName(), serieRest.getName());
     }
 
@@ -73,7 +68,7 @@ public class ScoreServiceImpl implements ScoreService {
     public void updateAverageScoreSerie(Long serieId, List<Float> scoreList, Float newScore) throws RankingException {
         scoreList.add(newScore);
         Float average = scoreAverageCalculator(scoreList);
-            serieService.updateAverageScore(serieId, average);
+        serieService.updateAverageScore(serieId, average);
     }
 
     void verifyTheScore(float score) throws RankingException {

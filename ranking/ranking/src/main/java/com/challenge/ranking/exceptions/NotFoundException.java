@@ -12,8 +12,4 @@ public class NotFoundException extends RankingException {
 	public NotFoundException(final String message) {
 		super(HttpStatus.NOT_FOUND.value(), message);
 	}
-
-	public NotFoundException(final String message, final ErrorDto data) {
-		super(HttpStatus.NOT_FOUND.value(), message, Arrays.asList(data));
-	}
 }

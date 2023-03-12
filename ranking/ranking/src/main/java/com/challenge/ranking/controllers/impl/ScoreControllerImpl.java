@@ -22,7 +22,7 @@ public class ScoreControllerImpl implements ScoreController {
     @Autowired
     ScoreService scoreService;
     @Override
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public RankingResponse<ScoreRest> createReview(@PathVariable Long userId, @PathVariable Long serieId, @RequestBody float score) throws RankingException {
         return new RankingResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), CommonConstants.OK,
