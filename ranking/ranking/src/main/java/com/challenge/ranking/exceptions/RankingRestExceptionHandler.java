@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class RankingRestExceptionHandler {
-
 	@ExceptionHandler({ Exception.class })
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody

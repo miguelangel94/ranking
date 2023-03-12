@@ -44,8 +44,8 @@ public class UserControllerTest {
                 get("/ranking/v1/users")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
+        assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-
     }
 
 }

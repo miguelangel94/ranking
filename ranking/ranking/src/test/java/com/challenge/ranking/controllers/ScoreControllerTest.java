@@ -1,8 +1,6 @@
 package com.challenge.ranking.controllers;
 
 import com.challenge.ranking.json.ScoreRest;
-import com.challenge.ranking.json.SerieRest;
-import com.challenge.ranking.json.UserRest;
 import com.challenge.ranking.services.ScoreService;
 import com.challenge.ranking.services.SerieService;
 import com.challenge.ranking.services.UserService;
@@ -53,8 +51,8 @@ public class ScoreControllerTest {
                         .content(json))
                 .andReturn()
                 .getResponse();
+        assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-
     }
 
 }

@@ -37,16 +37,19 @@ public class SerieServiceImpl implements SerieService {
     @Override
     public SerieRest findById(Long id) throws RankingException {
         Serie serie;
-        serie = serieRepository.findById(id).orElseThrow(() -> new NotFoundException("error, serie not found"));
+        serie = serieRepository.findById(id).orElseThrow(()
+                -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_SERIE));
         return SerieConverter.mapToRest(serie);
     }
     @Override
     public void updateAverageScore (Long serieId, float score) throws RankingException{
         Serie serie;
         try {
-            serie = serieRepository.findById(serieId).orElseThrow(() -> new NotFoundException("error, serie not found"));
+            serie = serieRepository.findById(serieId).orElseThrow(()
+                    -> new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_USER));
             serie.setAverageScore(score);
             serieRepository.save(serie);
+
         } catch (final Exception e) {
             LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
             throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
@@ -62,7 +65,8 @@ public class SerieServiceImpl implements SerieService {
 
     @Override
     public List<SerieRest> retrieveSerieScoreList() throws RankingException {
-        return serieRepository.findAll().stream().map(serie -> SerieConverter.mapToRestWithScore(serie)).collect(Collectors.toList());
+        return serieRepository.findAll().stream().map(serie
+                -> SerieConverter.mapToRestWithScore(serie)).collect(Collectors.toList());
     }
 }
 

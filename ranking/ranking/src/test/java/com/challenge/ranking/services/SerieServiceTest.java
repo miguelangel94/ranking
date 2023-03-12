@@ -6,9 +6,7 @@ import com.challenge.ranking.entites.User;
 import com.challenge.ranking.exceptions.RankingException;
 import com.challenge.ranking.json.SerieRest;
 import com.challenge.ranking.repositories.SerieRepository;
-import com.challenge.ranking.repositories.UserRepository;
 import com.challenge.ranking.services.impl.SerieServiceImpl;
-import com.challenge.ranking.services.impl.UserServiceImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -22,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @SpringBootTest
 public class SerieServiceTest {
@@ -50,49 +49,36 @@ public class SerieServiceTest {
     private Float SCORE = 5F;
     @Before
     public void executedBefore() {
-        SERIE_REST.setName(SERIE_NAME);
-        SERIE_REST.setId(SERIE_ID);
         SERIE.setAverageScore(SCORE);
         SERIE.setName(SERIE_NAME);
         SERIE.setId(SERIE_ID);
-        SERIE_REST_LIST.add(SERIE_REST);
-        SERIE_LIST.add(SERIE);
+        SERIE_REST.setName(SERIE_NAME);
+        SERIE_REST.setId(SERIE_ID);
+        SERIE_REST.setAverageScore(SCORE);
     }
 
     @Test
     public void whenFindByIdTheReturnTheSerie () throws RankingException {
-        SERIE.setAverageScore(SCORE);
-        SERIE.setName(SERIE_NAME);
-        SERIE.setId(SERIE_ID);
         Mockito.when(serieRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(SERIE));
         SerieRest response = serieService.findById(SERIE_ID);
+        assertThat(response).isNotNull();
         assertThat(response.getName()).isSameAs(SERIE.getName());
         Mockito.verify(serieRepository).findById(SERIE_ID);
     }
     @Test
     public void wheRetrieveSerieListThenReturnSeriesListSortedByScore () throws  RankingException {
-        SERIE_REST.setName(SERIE_NAME);
-        SERIE_REST.setId(SERIE_ID);
-        SERIE.setAverageScore(SCORE);
-        SERIE.setName(SERIE_NAME);
-        SERIE.setId(SERIE_ID);
         SERIE_REST_LIST.add(SERIE_REST);
         SERIE_LIST.add(SERIE);
         Mockito.when(serieRepository.findAllByOrderByAverageScoreDesc()).thenReturn(SERIE_LIST);
         List<SerieRest> response = serieService.retrieveSeriesListSortedByScore();
+        assertThat(response).isNotNull();
         assertThat(response.get(0).getName()).isSameAs(SERIE.getName());
         Mockito.verify(serieRepository).findAllByOrderByAverageScoreDesc();
 
     }
 
     @Test
-    public void whenRetrieveSerieScoreThenReturnTheList () throws RankingException{
-        SERIE_REST.setName(SERIE_NAME);
-        SERIE_REST.setId(SERIE_ID);
-        SERIE.setAverageScore(SCORE);
-        SERIE.setName(SERIE_NAME);
-        SERIE.setId(SERIE_ID);
-        SERIE_REST_LIST.add(SERIE_REST);
+    public void whenRetrieveSerieScoreThenReturnTheList () throws RankingException {
         USER.setName("name");
         SCORE_ENTITY.setSerie(SERIE);
         SCORE_ENTITY.setUser(USER);
@@ -102,15 +88,31 @@ public class SerieServiceTest {
         SERIE_LIST.add(SERIE);
         Mockito.when(serieRepository.findAll()).thenReturn(SERIE_LIST);
         List<SerieRest> response = serieService.retrieveSerieScoreList();
+        assertThat(response).isNotNull();
         assertThat(response.get(0).getName()).isSameAs(SERIE.getName());
         assertThat(response.size()).isEqualTo(1);
         Mockito.verify(serieRepository).findAll();
-
-
-
-
     }
+    @Test
+    public void whenCreateSerieReturnTheSerieCreated () throws RankingException {
+        given(serieRepository.save(Mockito.any())).willReturn(SERIE);
+        SerieRest response = serieService.createSerie(SERIE_REST);
+        assertThat(response).isNotNull();
+        assertThat(response.getName()).isSameAs(SERIE.getName());
+        }
+
+        @Test
+        public void updateAverageScoreTest () throws RankingException {
+        Mockito.when(serieRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(SERIE));
+        given(serieRepository.save(Mockito.any())).willReturn(SERIE);
+        serieService.updateAverageScore(1L,1F);
+        Mockito.verify(serieRepository).findById(Mockito.anyLong());
+        }
+
     @After
     public void executedAfter() {
+        SCORE_LIST.clear();
+        SERIE_REST_LIST.clear();
+        SERIE_LIST.clear();
     }
 }

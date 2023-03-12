@@ -58,6 +58,7 @@ public class SerieControllerTest {
                 .content(json))
                 .andReturn()
                 .getResponse();
+        assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
 }
         @Test
@@ -67,6 +68,7 @@ public class SerieControllerTest {
                     get("/ranking/v1/series")
                     .accept(MediaType.APPLICATION_JSON))
                     .andReturn().getResponse();
+            assertThat(response).isNotNull();
             assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
     }
@@ -77,6 +79,7 @@ public class SerieControllerTest {
                         get("/ranking/v1/series/scores")
                                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
+        assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
         @After
