@@ -1,2 +1,0 @@
-ALTER TABLE ranking.score
-  ADD CONSTRAINT uq_score UNIQUE(user_id, serie_id);
