@@ -75,8 +75,6 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/json-utils/json-utils -->
-
 	</dependencies>
 
 	<build>
@@ -91,6 +89,18 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>8.5.13</version>
+				<configuration>
+					<user>root</user>
+					<password>root</password>
+					<schemas>
+						<schema>ranking</schema>
+					</schemas>
 				</configuration>
 			</plugin>
 			<plugin>
