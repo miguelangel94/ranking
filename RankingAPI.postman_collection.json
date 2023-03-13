@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "6c0f472d-4373-441c-9129-80bc04d947d6",
+		"name": "RankingAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/ranking/v1/users/2/series/1/scores",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "8",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/ranking/v1/users/1/series/1/scores",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ranking",
+						"v1",
+						"users",
+						"1",
+						"series",
+						"1",
+						"scores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/ranking/v1/series",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Game of Thrones\",\r\n\"cover\": \"https://www.ign.com/tv/game-of-thrones\",\r\n\"sinopsis\": \"Juego de tronos es la historia de la lucha por un trono, el trono de hierro, forjado con las espadas de los enemigos vencidos.\",\r\n\"streamingPlatform\" : \"HBO Max\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/ranking/v1/series",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ranking",
+						"v1",
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/ranking/v1/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ranking/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ranking",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/ranking/v1/series/scores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ranking/v1/series/scores",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ranking",
+						"v1",
+						"series",
+						"scores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/ranking/v1/series",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ranking/v1/series",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ranking",
+						"v1",
+						"series"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
