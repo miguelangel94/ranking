@@ -1,7 +1,0 @@
-com\challenge\ranking\controllers\ScoreControllerTest.class
-com\challenge\ranking\services\ScoreServiceTest.class
-com\challenge\ranking\services\SerieServiceTest.class
-com\challenge\ranking\RankingApplicationTests.class
-com\challenge\ranking\controllers\SerieControllerTest.class
-com\challenge\ranking\controllers\UserControllerTest.class
-com\challenge\ranking\services\UserServiceTest.class
