@@ -1,7 +1,6 @@
 -- -----------------------------------------------------
 -- Table `ranking`.`Group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ranking`.`Group` ;
 
 CREATE TABLE IF NOT EXISTS `ranking`.`Group` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -14,7 +13,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `ranking`.`User`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ranking`.`User` ;
 
 CREATE TABLE IF NOT EXISTS `ranking`.`User` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -60,6 +58,6 @@ CREATE TABLE IF NOT EXISTS `ranking`.`Score` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-ALTER TABLE ranking.score
-  ADD CONSTRAINT uq_score UNIQUE(user_id, serie_id);
+ALTER TABLE `ranking`.`Score`
+  ADD CONSTRAINT uq_user_and_serie UNIQUE(user_id, serie_id);
 
